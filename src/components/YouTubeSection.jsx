@@ -1,8 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import {
-  CINEMATIC_PLAYER_ID,
-  useMediaPlayback,
-} from '../context/MediaPlaybackContext.jsx';
+import { reportGameplayVideoState } from '../lib/gameplayYoutubeBridge.js';
 
 let apiLoadingPromise = null;
 
@@ -63,7 +60,6 @@ export default function YouTubeSection({
   embedded = false,
   autoPlayOnScroll = false,
 }) {
-  const { setVideoState, markCinematicEnded } = useMediaPlayback();
   const sectionRef = useRef(null);
   const playerRef = useRef(null);
   const hasAutoPlayedRef = useRef(false);
@@ -77,7 +73,6 @@ export default function YouTubeSection({
     autoPlayOnScroll,
   );
   const showClickLayer = playerReady && !showPlayOverlay;
-  const isCinematic = playerId === CINEMATIC_PLAYER_ID;
 
   const startPlayback = () => {
     const player = playerRef.current;
@@ -121,10 +116,7 @@ export default function YouTubeSection({
             if (cancelled) return;
             const state = event.data;
             setPlayerState(state);
-            setVideoState(playerId, isVideoActive(state));
-            if (isCinematic && state === YT_ENDED) {
-              markCinematicEnded();
-            }
+            reportGameplayVideoState(playerId, state);
           },
         },
       });
@@ -132,13 +124,13 @@ export default function YouTubeSection({
 
     return () => {
       cancelled = true;
-      setVideoState(playerId, false);
+      reportGameplayVideoState(playerId, YT_ENDED);
       setPlayerReady(false);
       setPlayerState(-1);
       player?.destroy?.();
       playerRef.current = null;
     };
-  }, [playerId, videoId, setVideoState, isCinematic, markCinematicEnded]);
+  }, [playerId, videoId, autoPlayOnScroll]);
 
   useEffect(() => {
     if (!autoPlayOnScroll || !playerReady) return undefined;
