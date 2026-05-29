@@ -48,8 +48,8 @@ function isVideoActive(state) {
   return state === YT_PLAYING || state === YT_BUFFERING;
 }
 
-function shouldShowPlayOverlay(state, playerReady, autoPlayOnScroll) {
-  if (!playerReady || autoPlayOnScroll) return false;
+function shouldShowPlayOverlay(state, playerReady) {
+  if (!playerReady) return false;
   return state !== YT_PLAYING && state !== YT_BUFFERING;
 }
 
@@ -67,11 +67,7 @@ export default function YouTubeSection({
   const [playerReady, setPlayerReady] = useState(false);
   const [playerState, setPlayerState] = useState(-1);
   const isActivelyPlaying = isVideoActive(playerState);
-  const showPlayOverlay = shouldShowPlayOverlay(
-    playerState,
-    playerReady,
-    autoPlayOnScroll,
-  );
+  const showPlayOverlay = shouldShowPlayOverlay(playerState, playerReady);
   const showClickLayer = playerReady && !showPlayOverlay;
 
   const startPlayback = () => {

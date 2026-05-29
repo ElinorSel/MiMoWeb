@@ -99,7 +99,12 @@ export default function HomePage() {
                 <p className="team-card__links">
                   <a href={`mailto:${member.email}`}>{member.email}</a>
                   <br />
-                  <a href={member.linkedIn} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={member.linkedIn}
+                    className="team-card__linkedin"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {member.linkedInLabel}
                   </a>
                 </p>

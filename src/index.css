@@ -1,6 +1,8 @@
 :root {
   --color-black: #000000;
   --color-white: #ffffff;
+  --color-accent: #0a7b73;
+  --color-accent-hover: #085f59;
   --gray-mid: #888888;
   --gray-light: #bbbbbb;
   --font-body: 'Inclusive Sans', system-ui, sans-serif;
@@ -327,6 +329,13 @@ img {
   height: 48px;
   flex-shrink: 0;
   image-rendering: pixelated;
+  filter: drop-shadow(0 3px 4px rgba(255, 255, 255, 0.95))
+    drop-shadow(0 6px 14px rgba(255, 255, 255, 0.55));
+}
+
+.section--gameplay .section-heading__icon {
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.2))
+    drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
 }
 
 .subsection-heading {
@@ -453,16 +462,20 @@ img {
   margin-left: 0.5rem;
 }
 
-.section--gameplay .youtube-section__play-overlay {
-  background-color: rgba(255, 255, 255, 0.88);
+.section--gameplay .youtube-section__play-overlay,
+.section--video .youtube-section__play-overlay {
+  background-color: rgba(255, 255, 255, 0.97);
 }
 
 .section--gameplay .youtube-section__play-overlay:hover,
-.section--gameplay .youtube-section__play-overlay:focus-visible {
-  background-color: rgba(255, 255, 255, 0.95);
+.section--gameplay .youtube-section__play-overlay:focus-visible,
+.section--video .youtube-section__play-overlay:hover,
+.section--video .youtube-section__play-overlay:focus-visible {
+  background-color: rgba(255, 255, 255, 1);
 }
 
-.section--gameplay .youtube-section__play-icon {
+.section--gameplay .youtube-section__play-icon,
+.section--video .youtube-section__play-icon {
   border-color: transparent transparent transparent var(--color-black);
 }
 
@@ -640,6 +653,15 @@ img {
   margin: 0 0 1rem;
   font-size: 0.85rem;
   line-height: 1.5;
+}
+
+.surface-light a.team-card__linkedin {
+  color: var(--color-accent);
+}
+
+.surface-light a.team-card__linkedin:hover,
+.surface-light a.team-card__linkedin:focus-visible {
+  color: var(--color-accent-hover);
 }
 
 .team-card__bullets {

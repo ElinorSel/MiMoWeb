@@ -49,8 +49,8 @@ export const teamMembers = [
     name: 'ELINOR SELINDER',
     role: 'Artist & Programmer',
     email: 'elinor.selinder@gmail.com',
-    linkedIn: 'https://linkedin.com/in/ElinorSelinder',
-    linkedInLabel: 'linkedin.com/in/ElinorSelinder',
+    linkedIn: 'https://www.linkedin.com/in/elinorselinder/',
+    linkedInLabel: 'https://www.linkedin.com/in/elinorselinder/',
     portrait: '/images/team_member_4.png',
     bullets: [
       'Creative Lead - Story & Narrative Design, Concept Art, Cinematic',
@@ -63,8 +63,8 @@ export const teamMembers = [
     name: 'William Sassner',
     role: 'Sound Designer',
     email: 'wilsa@kth.se',
-    linkedIn: 'https://linkedin.com/in/william-sassner',
-    linkedInLabel: 'linkedin.com/in/william-sassner',
+    linkedIn: 'https://www.linkedin.com/in/william-sassner-andersson-a556522bb/',
+    linkedInLabel: 'linkedin.com/in/william-sassner-andresson',
     portrait: '/images/team_member_3.png',
     bullets: [
       'Music Composition & Production',
