@@ -23,7 +23,7 @@ export const learnMoreParagraphs = [
   'Feel free to contact us with any questions or inquiries.',
 ];
 
-export const TEAM_EMAIL = 'mimo-game-dev@ucsc.edu';
+export const TEAM_EMAIL = 'elinor.selinder@gmail.com';
 
 export const teamMembers = [
   {

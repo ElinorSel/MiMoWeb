@@ -4,7 +4,7 @@ import { useMediaPlayback } from '../context/MediaPlaybackContext.jsx';
 const SOUNDTRACK_SRC = '/audio/mimo-main-menu.mp3';
 
 export default function SiteSoundtrack() {
-  const { videoPlaying, cinematicEnded, welcomeDismissed } = useMediaPlayback();
+  const { videoPlaying, cinematicEnded } = useMediaPlayback();
   const audioRef = useRef(null);
   const startedRef = useRef(false);
   const userPausedRef = useRef(false);
@@ -19,7 +19,6 @@ export default function SiteSoundtrack() {
       || userPausedRef.current
       || videoPlaying
       || !cinematicEnded
-      || !welcomeDismissed
     ) {
       return;
     }
@@ -31,7 +30,7 @@ export default function SiteSoundtrack() {
     } catch {
       /* playback blocked */
     }
-  }, [videoPlaying, cinematicEnded, welcomeDismissed]);
+  }, [videoPlaying, cinematicEnded]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -50,10 +49,10 @@ export default function SiteSoundtrack() {
   }, []);
 
   useEffect(() => {
-    if (cinematicEnded && welcomeDismissed) {
+    if (cinematicEnded) {
       startSoundtrack();
     }
-  }, [cinematicEnded, welcomeDismissed, startSoundtrack]);
+  }, [cinematicEnded, startSoundtrack]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -75,7 +74,7 @@ export default function SiteSoundtrack() {
 
   const toggleSoundtrack = async () => {
     const audio = audioRef.current;
-    if (!audio || !welcomeDismissed) return;
+    if (!audio) return;
 
     if (audio.paused) {
       if (videoPlaying) {
@@ -102,16 +101,14 @@ export default function SiteSoundtrack() {
   return (
     <>
       <audio ref={audioRef} src={SOUNDTRACK_SRC} loop preload="auto" />
-      {welcomeDismissed && (
-        <button
-          type="button"
-          className="soundtrack-toggle hover-dark"
-          onClick={toggleSoundtrack}
-          aria-label={playing ? 'Pause soundtrack' : 'Play soundtrack'}
-        >
-          {playing ? '♫' : '♪'}
-        </button>
-      )}
+      <button
+        type="button"
+        className="soundtrack-toggle hover-dark"
+        onClick={toggleSoundtrack}
+        aria-label={playing ? 'Pause soundtrack' : 'Play soundtrack'}
+      >
+        {playing ? '♫' : '♪'}
+      </button>
     </>
   );
 }

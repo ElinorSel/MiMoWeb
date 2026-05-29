@@ -51,27 +51,53 @@ function isVideoActive(state) {
   return state === YT_PLAYING || state === YT_BUFFERING;
 }
 
+function shouldShowPlayOverlay(state, playerReady, autoPlayOnScroll) {
+  if (!playerReady || autoPlayOnScroll) return false;
+  return state !== YT_PLAYING && state !== YT_BUFFERING;
+}
+
 export default function YouTubeSection({
   videoId,
   playerId,
   className = '',
   embedded = false,
-  autoPlayAfterWelcome = false,
+  autoPlayOnScroll = false,
 }) {
-  const { setVideoState, welcomeDismissed, markCinematicEnded } = useMediaPlayback();
+  const { setVideoState, markCinematicEnded } = useMediaPlayback();
   const sectionRef = useRef(null);
   const playerRef = useRef(null);
   const hasAutoPlayedRef = useRef(false);
   const autoplayDelayRef = useRef(null);
   const [playerReady, setPlayerReady] = useState(false);
-  const [isActivelyPlaying, setIsActivelyPlaying] = useState(false);
+  const [playerState, setPlayerState] = useState(-1);
+  const isActivelyPlaying = isVideoActive(playerState);
+  const showPlayOverlay = shouldShowPlayOverlay(
+    playerState,
+    playerReady,
+    autoPlayOnScroll,
+  );
+  const showClickLayer = playerReady && !showPlayOverlay;
   const isCinematic = playerId === CINEMATIC_PLAYER_ID;
 
-  const handleOverlayPlay = () => {
+  const startPlayback = () => {
     const player = playerRef.current;
     if (!player) return;
     player.unMute?.();
     player.playVideo?.();
+  };
+
+  const handleOverlayPlay = () => {
+    startPlayback();
+  };
+
+  const handleVideoClick = () => {
+    const player = playerRef.current;
+    if (!player) return;
+    if (isActivelyPlaying) {
+      player.pauseVideo?.();
+    } else {
+      startPlayback();
+    }
   };
 
   useEffect(() => {
@@ -94,7 +120,7 @@ export default function YouTubeSection({
           onStateChange: (event) => {
             if (cancelled) return;
             const state = event.data;
-            setIsActivelyPlaying(state === YT_PLAYING || state === YT_BUFFERING);
+            setPlayerState(state);
             setVideoState(playerId, isVideoActive(state));
             if (isCinematic && state === YT_ENDED) {
               markCinematicEnded();
@@ -108,14 +134,14 @@ export default function YouTubeSection({
       cancelled = true;
       setVideoState(playerId, false);
       setPlayerReady(false);
-      setIsActivelyPlaying(false);
+      setPlayerState(-1);
       player?.destroy?.();
       playerRef.current = null;
     };
   }, [playerId, videoId, setVideoState, isCinematic, markCinematicEnded]);
 
   useEffect(() => {
-    if (!autoPlayAfterWelcome || !welcomeDismissed || !playerReady) return undefined;
+    if (!autoPlayOnScroll || !playerReady) return undefined;
 
     const section = sectionRef.current;
     if (!section) return undefined;
@@ -164,15 +190,27 @@ export default function YouTubeSection({
       observer.disconnect();
       cancelAutoplay();
     };
-  }, [autoPlayAfterWelcome, welcomeDismissed, playerReady]);
+  }, [autoPlayOnScroll, playerReady]);
 
   const Tag = embedded ? 'div' : 'section';
 
   return (
     <Tag ref={sectionRef} className={`youtube-section ${className}`.trim()}>
-      <div className="youtube-section__wrapper youtube-section__wrapper--chromeless">
+      <div
+        className={`youtube-section__wrapper youtube-section__wrapper--chromeless${
+          isActivelyPlaying ? ' youtube-section__wrapper--playing' : ''
+        }`}
+      >
         <div id={playerId} className="youtube-section__player" title="YouTube video player" />
-        {playerReady && !isActivelyPlaying && (
+        {showClickLayer && (
+          <button
+            type="button"
+            className="youtube-section__click-layer"
+            onClick={handleVideoClick}
+            aria-label={isActivelyPlaying ? 'Pause video' : 'Play video'}
+          />
+        )}
+        {showPlayOverlay && (
           <button
             type="button"
             className="youtube-section__play-overlay"

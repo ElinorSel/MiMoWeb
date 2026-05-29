@@ -38,7 +38,7 @@ export default function HomePage() {
           <YouTubeSection
             videoId={CINEMATIC_YOUTUBE_ID}
             playerId="youtube-cinematic"
-            autoPlayAfterWelcome
+            autoPlayOnScroll
           />
         </section>
 

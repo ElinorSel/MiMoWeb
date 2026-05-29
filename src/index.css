@@ -385,6 +385,21 @@ img {
   pointer-events: none;
 }
 
+.youtube-section__wrapper--chromeless.youtube-section__wrapper--playing .youtube-section__player iframe {
+  transform: translate(-50%, -50%) scale(1.18);
+}
+
+.youtube-section__click-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+}
+
 .youtube-section__play-overlay {
   position: absolute;
   inset: 0;
@@ -425,43 +440,6 @@ img {
 
 .section--gameplay .youtube-section__play-icon {
   border-color: transparent transparent transparent var(--color-black);
-}
-
-.welcome-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 300;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.85);
-}
-
-.welcome-modal__panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 2.5rem 3rem;
-  background-color: var(--color-white);
-  color: var(--color-black);
-  border: 3px solid var(--color-black);
-  text-align: center;
-}
-
-.welcome-modal__title {
-  margin: 0;
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-}
-
-.welcome-modal__button {
-  font-family: var(--font-body);
-  font-size: 1.1rem;
-  font-weight: 700;
-  padding: 0.6rem 2rem;
-  cursor: pointer;
-  background-color: var(--color-white);
-  border: 2px solid var(--color-black);
 }
 
 .soundtrack-toggle {

@@ -7,7 +7,6 @@ const MediaPlaybackContext = createContext(null);
 export function MediaPlaybackProvider({ children }) {
   const playingVideosRef = useRef(new Set());
   const [videoPlaying, setVideoPlaying] = useState(false);
-  const [welcomeDismissed, setWelcomeDismissed] = useState(false);
   const [cinematicEnded, setCinematicEnded] = useState(false);
 
   const setVideoState = useCallback((playerId, isPlaying) => {
@@ -19,10 +18,6 @@ export function MediaPlaybackProvider({ children }) {
     setVideoPlaying(playingVideosRef.current.size > 0);
   }, []);
 
-  const dismissWelcome = useCallback(() => {
-    setWelcomeDismissed(true);
-  }, []);
-
   const markCinematicEnded = useCallback(() => {
     setCinematicEnded(true);
   }, []);
@@ -30,20 +25,11 @@ export function MediaPlaybackProvider({ children }) {
   const value = useMemo(
     () => ({
       videoPlaying,
-      welcomeDismissed,
       cinematicEnded,
       setVideoState,
-      dismissWelcome,
       markCinematicEnded,
     }),
-    [
-      videoPlaying,
-      welcomeDismissed,
-      cinematicEnded,
-      setVideoState,
-      dismissWelcome,
-      markCinematicEnded,
-    ],
+    [videoPlaying, cinematicEnded, setVideoState, markCinematicEnded],
   );
 
   return (
