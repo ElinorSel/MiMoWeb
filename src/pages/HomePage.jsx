@@ -12,6 +12,7 @@ import {
   aboutMiMoLead,
   aboutMiMoQuote,
   aboutMiMoParagraphs,
+  keyboardControlsNote,
   learnMoreParagraphs,
   teamMembers,
   TEAM_EMAIL,
@@ -75,6 +76,13 @@ export default function HomePage() {
           <img
             src="/images/keybindings.png"
             alt="Game controller keybindings diagram"
+            className="keybindings-image"
+          />
+          <h3 className="subsection-heading">Keyboard Controls</h3>
+          <p className="gameplay-note">{keyboardControlsNote}</p>
+          <img
+            src="/images/keybindings_keyboard.png"
+            alt="Keyboard controls diagram"
             className="keybindings-image"
           />
         </section>

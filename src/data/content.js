@@ -19,6 +19,9 @@ export const aboutMiMoParagraphs = [
   'Use your differences to solve tricky puzzles, and find the missing shards. But you must be careful, touching a shard will awaken a monster. Use the shards to survive, gain powers, defeat the monsters and restore the world.',
 ];
 
+export const keyboardControlsNote =
+  'MiMo is designed for controller play, but full keyboard support is available if you prefer to play without a gamepad.';
+
 export const learnMoreParagraphs = [
   'Mimo is a 2 month part time project carried out by Elinor Selinder, Zhang RuiFeng, William Sassner and Qingya Li.',
   'Our goal is to create a unique and engaging co-op experience that challenges players to think outside the box and work together in new and exciting ways.',
