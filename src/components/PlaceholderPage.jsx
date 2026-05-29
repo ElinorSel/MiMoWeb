@@ -3,8 +3,9 @@ import Navbar from './Navbar.jsx';
 
 export default function PlaceholderPage({ title }) {
   return (
-    <div className="placeholder-page surface-dark">
+    <>
       <Navbar />
+      <div className="placeholder-page surface-dark">
       <main className="placeholder-page__main">
         <h1>{title}</h1>
         <p>Coming soon.</p>
@@ -14,6 +15,7 @@ export default function PlaceholderPage({ title }) {
           </Link>
         </p>
       </main>
-    </div>
+      </div>
+    </>
   );
 }

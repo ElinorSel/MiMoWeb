@@ -1,4 +1,5 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import miIcon from '../assets/mi_icon.gif';
 
 const anchorLinks = [
   { label: 'World of MiMo', hash: '#world' },
@@ -9,11 +10,17 @@ const anchorLinks = [
 
 export default function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const onHome = location.pathname === '/home';
 
-  const scrollToTop = (e) => {
+  const handleBrandClick = (e) => {
+    if (onHome) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigate('/home');
   };
 
   const handleAnchor = (hash) => (e) => {
@@ -26,16 +33,24 @@ export default function Navbar() {
   const anchorHref = (hash) => (onHome ? hash : `/home${hash}`);
 
   return (
-    <nav className="navbar surface-dark" aria-label="Main navigation">
-      <a
-        href="/home"
-        className="navbar__brand"
-        onClick={scrollToTop}
-        aria-label="Back to top"
-      >
-        <img src="/images/mi_icon.gif" alt="" className="navbar__icon" />
-        <span>MiMo</span>
-      </a>
+    <nav className="navbar" aria-label="Main navigation">
+      <div className="navbar__brand-wrap">
+        <a
+          href="/home"
+          className="navbar__brand"
+          onClick={handleBrandClick}
+        >
+          <img
+            src={miIcon}
+            alt=""
+            className="navbar__icon"
+            width="36"
+            height="36"
+            decoding="async"
+          />
+          <span className="navbar__title">MiMo</span>
+        </a>
+      </div>
       <ul className="navbar__links">
         {anchorLinks.map(({ label, hash }) => (
           <li key={hash}>

@@ -27,8 +27,9 @@ export default function HomePage() {
   }, [hash]);
 
   return (
-    <div className="home-page surface-dark">
+    <>
       <Navbar />
+      <div className="home-page surface-dark">
       <main>
         <Hero />
 
@@ -135,6 +136,7 @@ export default function HomePage() {
           </div>
         </section>
       </main>
-    </div>
+      </div>
+    </>
   );
 }
