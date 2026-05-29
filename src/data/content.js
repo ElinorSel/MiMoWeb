@@ -39,6 +39,8 @@ export const teamMembers = [
     name: 'Qingya Li',
     role: 'Level Designer & Artist',
     email: 'qingya@kth.com',
+    linkedIn: 'https://linkedin.com/in/sam-li-dev',
+    linkedInLabel: 'linkedin.com/in/sam-li-dev',
     portrait: '/images/team_member_2.png',
     bullets: [
       'Level Designer - Puzzle and Level design',
@@ -65,7 +67,7 @@ export const teamMembers = [
     role: 'Sound Designer',
     email: 'wilsa@kth.se',
     linkedIn: 'https://www.linkedin.com/in/william-sassner-andersson-a556522bb/',
-    linkedInLabel: 'linkedin.com/in/william-sassner-andresson',
+    linkedInLabel: 'linkedin.com/in/william-sassner-andersson',
     portrait: '/images/team_member_3.png',
     bullets: [
       'Music Composition & Production',
@@ -78,6 +80,8 @@ export const teamMembers = [
     name: 'ZHANG RUIFENG',
     role: 'Programmer', 
     email: 'ruifengz@kth.se',
+    linkedIn: 'www.linkedin.com/in/zhang-ruifeng',
+    linkedInLabel: 'www.linkedin.com/in/zhang-ruifeng',
     portrait: '/images/team_member_1.png',
     bullets: [
       'Programming & System Architecture',
