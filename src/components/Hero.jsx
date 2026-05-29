@@ -24,11 +24,23 @@ export default function Hero() {
       <div className="hero__content">
         <a
           href={UNITY_BUILD_URL}
-          className="hero__play hover-light"
+          className="hero__play"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Play
+          <img
+            src="/images/mi_icon.gif"
+            alt=""
+            className="hero__play__icon"
+            aria-hidden="true"
+          />
+          <span className="hero__play__text">Play</span>
+          <img
+            src="/images/mo_icon.gif"
+            alt=""
+            className="hero__play__icon"
+            aria-hidden="true"
+          />
         </a>
         <p className="hero__tagline">
           MiMo — a Co-Op puzzle and boss-fighting game set in two linked worlds.
