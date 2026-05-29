@@ -14,6 +14,7 @@ import {
   TEAM_EMAIL,
   socialLinks,
 } from '../data/content.js';
+import { formatBoldText } from '../utils/formatBoldText.jsx';
 
 export default function HomePage() {
   const { hash } = useLocation();
@@ -58,7 +59,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="gameplay" className="section">
+        <section id="gameplay" className="section section--gameplay">
           <SectionHeading title="Gameplay" />
           <YouTubeSection
             videoId={GAMEPLAY_YOUTUBE_ID}
@@ -111,7 +112,7 @@ export default function HomePage() {
           <SectionHeading title="Learn More" />
           <div className="section__body">
             {learnMoreParagraphs.map((text) => (
-              <FadeInParagraph key={text}>{text}</FadeInParagraph>
+              <FadeInParagraph key={text}>{formatBoldText(text)}</FadeInParagraph>
             ))}
             <FadeInParagraph>
               Contact us at:{' '}

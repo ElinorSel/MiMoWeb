@@ -259,6 +259,41 @@ img {
   padding-bottom: 2rem;
 }
 
+.section--gameplay {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.section--gameplay > * {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section--gameplay .section-heading {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 2.5rem;
+  justify-content: center;
+  text-align: center;
+}
+
+.section--gameplay .section-heading__text {
+  color: var(--color-black);
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.section--gameplay .subsection-heading {
+  color: var(--color-black);
+}
+
+.section--gameplay .youtube-section__wrapper {
+  border-color: var(--color-black);
+}
+
 .section--text .section__body {
   display: flex;
   flex-direction: column;
