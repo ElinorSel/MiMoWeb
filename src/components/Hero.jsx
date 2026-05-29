@@ -30,16 +30,16 @@ export default function Hero() {
           rel="noopener noreferrer"
         >
           <img
-            src="/images/mi_icon.gif"
+            src="/images/Mi-headbutt.gif"
             alt=""
             className="hero__play__icon"
             aria-hidden="true"
           />
           <span className="hero__play__text">Play</span>
           <img
-            src="/images/mo_icon.gif"
+            src="/images/Mo-headbutt.gif"
             alt=""
-            className="hero__play__icon"
+            className="hero__play__icon hero__play__icon--flip"
             aria-hidden="true"
           />
         </a>

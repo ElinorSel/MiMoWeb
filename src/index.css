@@ -228,16 +228,22 @@ img {
 }
 
 .hero__play__icon {
-  width: 48px;
-  height: 48px;
+  width: auto;
+  height: clamp(108px, 18vw, 144px);
+  max-width: none;
   flex-shrink: 0;
   image-rendering: pixelated;
+  object-fit: contain;
   opacity: 0;
   transition: opacity 0.2s ease;
 }
 
 .hero__play:hover .hero__play__icon {
   opacity: 1;
+}
+
+.hero__play__icon--flip {
+  transform: scaleX(-1);
 }
 
 .hero__tagline {
@@ -740,8 +746,8 @@ img {
   }
 
   .hero__play__icon {
-    width: 36px;
-    height: 36px;
+    height: 92px;
+    width: auto;
   }
 
   .hero__content {
