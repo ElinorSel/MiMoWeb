@@ -13,8 +13,6 @@ npm run dev
 
 Edit `src/config.js` to set:
 
-- `UNITY_BUILD_URL` — Unity WebGL build link for the hero Play button
-- `CINEMATIC_YOUTUBE_ID` — YouTube video ID for the cinematic section
 - `GAMEPLAY_YOUTUBE_ID` — YouTube video ID for the gameplay section
 
 Use the video ID only (the part after `v=` in a YouTube URL), not the full URL.
@@ -22,5 +20,21 @@ Use the video ID only (the part after `v=` in a YouTube URL), not the full URL.
 ## Routes
 
 - `/home` — main scrollable page
+- `/play` — full-screen Unity WebGL game (no site chrome or background audio)
 - `/devlog` — placeholder
 - `/gdd` — placeholder
+
+## Unity build
+
+Place WebGL build files in `public/Build/`. The play page expects:
+
+- `web build 2.loader.js`
+- `web build 2.data.gz`
+- `web build 2.framework.js.gz`
+- `web build 2.wasm.gz`
+
+If loading fails in the browser, see the comment at the top of `src/pages/PlayPage.jsx`.
+
+### StreamingAssets (FMOD audio)
+
+Copy the `StreamingAssets` folder from your Unity WebGL build output into `public/StreamingAssets/`. Without those `.bank` files, the game may load but audio and some scenes can break.

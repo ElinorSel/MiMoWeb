@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { UNITY_BUILD_URL } from '../config.js';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   const [frame, setFrame] = useState(1);
@@ -23,26 +23,9 @@ export default function Hero() {
       />
       <div className="hero__gradient" aria-hidden="true" />
       <div className="hero__content">
-        <a
-          href={UNITY_BUILD_URL}
-          className="hero__play"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            src="/images/mi_icon.gif"
-            alt=""
-            className="hero__play__icon"
-            aria-hidden="true"
-          />
-          <span className="hero__play__text">Play</span>
-          <img
-            src="/images/mo_icon.gif"
-            alt=""
-            className="hero__play__icon"
-            aria-hidden="true"
-          />
-        </a>
+        <Link to="/play" className="hero__play">
+          ▶ Play MiMo
+        </Link>
         <p className="hero__tagline">
           MiMo, a Co-Op puzzle and boss-fighting game set in two linked worlds.
         </p>

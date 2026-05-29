@@ -1,0 +1,11 @@
+/Build/web build 2.data.gz
+  Content-Encoding: gzip
+  Content-Type: application/gzip
+
+/Build/web build 2.framework.js.gz
+  Content-Encoding: gzip
+  Content-Type: application/javascript
+
+/Build/web build 2.wasm.gz
+  Content-Encoding: gzip
+  Content-Type: application/wasm

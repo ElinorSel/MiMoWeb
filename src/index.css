@@ -225,19 +225,6 @@ img {
   color: var(--color-black);
 }
 
-.hero__play__icon {
-  width: 48px;
-  height: 48px;
-  flex-shrink: 0;
-  image-rendering: pixelated;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.hero__play:hover .hero__play__icon {
-  opacity: 1;
-}
-
 .hero__tagline {
   width: 100%;
   text-align: center;
@@ -251,12 +238,6 @@ img {
   padding: 4rem 1.5rem;
   max-width: 900px;
   margin: 0 auto;
-}
-
-.section--video {
-  max-width: 1000px;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
 }
 
 .section--gameplay {
@@ -427,65 +408,6 @@ img {
   border-color: transparent transparent transparent var(--color-black);
 }
 
-.welcome-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 300;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.85);
-}
-
-.welcome-modal__panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 2.5rem 3rem;
-  background-color: var(--color-white);
-  color: var(--color-black);
-  border: 3px solid var(--color-black);
-  text-align: center;
-}
-
-.welcome-modal__title {
-  margin: 0;
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-}
-
-.welcome-modal__button {
-  font-family: var(--font-body);
-  font-size: 1.1rem;
-  font-weight: 700;
-  padding: 0.6rem 2rem;
-  cursor: pointer;
-  background-color: var(--color-white);
-  border: 2px solid var(--color-black);
-}
-
-.soundtrack-toggle {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 200;
-  width: 3rem;
-  height: 3rem;
-  padding: 0;
-  font-size: 1.35rem;
-  line-height: 1;
-  cursor: pointer;
-  color: var(--color-white);
-  background-color: var(--color-black);
-  border: 2px solid var(--color-white);
-  transition: color 0.2s;
-}
-
-.soundtrack-toggle:hover,
-.soundtrack-toggle:focus-visible {
-  color: var(--color-white);
-}
-
 .keybindings-image {
   display: block;
   margin: 0 auto;
@@ -600,11 +522,6 @@ img {
   .hero__play {
     margin-right: 0;
     align-self: center;
-  }
-
-  .hero__play__icon {
-    width: 36px;
-    height: 36px;
   }
 
   .hero__content {

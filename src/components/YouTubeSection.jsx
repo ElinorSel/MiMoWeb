@@ -1,12 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import {
-  CINEMATIC_PLAYER_ID,
-  useMediaPlayback,
-} from '../context/MediaPlaybackContext.jsx';
 
 let apiLoadingPromise = null;
 
-const YT_ENDED = 0;
 const YT_PLAYING = 1;
 const YT_BUFFERING = 3;
 
@@ -47,25 +42,15 @@ function loadYouTubeIframeAPI() {
   return apiLoadingPromise;
 }
 
-function isVideoActive(state) {
-  return state === YT_PLAYING || state === YT_BUFFERING;
-}
-
 export default function YouTubeSection({
   videoId,
   playerId,
   className = '',
   embedded = false,
-  autoPlayAfterWelcome = false,
 }) {
-  const { setVideoState, welcomeDismissed, markCinematicEnded } = useMediaPlayback();
-  const sectionRef = useRef(null);
   const playerRef = useRef(null);
-  const hasAutoPlayedRef = useRef(false);
-  const autoplayDelayRef = useRef(null);
   const [playerReady, setPlayerReady] = useState(false);
   const [isActivelyPlaying, setIsActivelyPlaying] = useState(false);
-  const isCinematic = playerId === CINEMATIC_PLAYER_ID;
 
   const handleOverlayPlay = () => {
     const player = playerRef.current;
@@ -95,10 +80,6 @@ export default function YouTubeSection({
             if (cancelled) return;
             const state = event.data;
             setIsActivelyPlaying(state === YT_PLAYING || state === YT_BUFFERING);
-            setVideoState(playerId, isVideoActive(state));
-            if (isCinematic && state === YT_ENDED) {
-              markCinematicEnded();
-            }
           },
         },
       });
@@ -106,70 +87,17 @@ export default function YouTubeSection({
 
     return () => {
       cancelled = true;
-      setVideoState(playerId, false);
       setPlayerReady(false);
       setIsActivelyPlaying(false);
       player?.destroy?.();
       playerRef.current = null;
     };
-  }, [playerId, videoId, setVideoState, isCinematic, markCinematicEnded]);
-
-  useEffect(() => {
-    if (!autoPlayAfterWelcome || !welcomeDismissed || !playerReady) return undefined;
-
-    const section = sectionRef.current;
-    if (!section) return undefined;
-
-    let observer = null;
-
-    const cancelAutoplay = () => {
-      if (autoplayDelayRef.current) {
-        clearTimeout(autoplayDelayRef.current);
-        autoplayDelayRef.current = null;
-      }
-    };
-
-    const scheduleAutoplay = () => {
-      if (hasAutoPlayedRef.current || autoplayDelayRef.current) return;
-
-      autoplayDelayRef.current = setTimeout(() => {
-        autoplayDelayRef.current = null;
-        const player = playerRef.current;
-        if (!player || hasAutoPlayedRef.current) return;
-
-        player.unMute?.();
-        player.playVideo?.();
-        hasAutoPlayedRef.current = true;
-        observer?.disconnect();
-      }, 1000);
-    };
-
-    observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          scheduleAutoplay();
-        } else {
-          cancelAutoplay();
-        }
-      },
-      {
-        threshold: 0.45,
-        rootMargin: '0px 0px -30% 0px',
-      },
-    );
-
-    observer.observe(section);
-
-    return () => {
-      observer.disconnect();
-      cancelAutoplay();
-    };
-  }, [autoPlayAfterWelcome, welcomeDismissed, playerReady]);
+  }, [playerId, videoId]);
 
   const Tag = embedded ? 'div' : 'section';
 
   return (
-    <Tag ref={sectionRef} className={`youtube-section ${className}`.trim()}>
+    <Tag className={`youtube-section ${className}`.trim()}>
       <div className="youtube-section__wrapper youtube-section__wrapper--chromeless">
         <div id={playerId} className="youtube-section__player" title="YouTube video player" />
         {playerReady && !isActivelyPlaying && (
