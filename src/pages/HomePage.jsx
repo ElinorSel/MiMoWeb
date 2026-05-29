@@ -3,11 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar.jsx';
 import Hero from '../components/Hero.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
+import FadeInBlockquote from '../components/FadeInBlockquote.jsx';
 import FadeInParagraph from '../components/FadeInParagraph.jsx';
 import YouTubeSection from '../components/YouTubeSection.jsx';
 import { CINEMATIC_YOUTUBE_ID, GAMEPLAY_YOUTUBE_ID } from '../config.js';
 import {
   worldOfMiMoParagraphs,
+  aboutMiMoLead,
+  aboutMiMoQuote,
   aboutMiMoParagraphs,
   learnMoreParagraphs,
   teamMembers,
@@ -51,9 +54,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="about" className="section section--text">
+        <section id="about" className="section section--text section--about">
           <SectionHeading title="About MiMo" />
           <div className="section__body">
+            <FadeInBlockquote>{aboutMiMoQuote}</FadeInBlockquote>
             {aboutMiMoParagraphs.map((text) => (
               <FadeInParagraph key={text}>{text}</FadeInParagraph>
             ))}

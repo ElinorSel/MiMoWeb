@@ -7,6 +7,12 @@ export const worldOfMiMoParagraphs = [
   'This is MiMo.',
 ];
 
+export const aboutMiMoLead =
+  'Two players, one existence. Mi and Mo. They’re connected, but exist in mirrored worlds.';
+
+export const aboutMiMoQuote =
+  'Two players, one existence.  Mi and Mo. They’re connected, but exist in mirrored worlds.';
+
 export const aboutMiMoParagraphs = [
   'The world of MiMo is divided into two realms Light and Dark. In your respective worlds Mi and Mo always have opposing powers. If Mi is dark Mo is light , if Mi is push Mo is pull.',
   'The two worlds are intrinsically linked, and actions taken in one world can have a profound impact on the other. Players must navigate through both worlds, uncovering secrets and overcoming challenges as they progress through the game\'s narrative.',

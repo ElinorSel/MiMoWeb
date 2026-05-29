@@ -300,6 +300,14 @@ img {
   gap: 3.5rem;
 }
 
+.section--about {
+  padding-bottom: 10rem;
+}
+
+.section--about .section__body {
+  gap: 4rem;
+}
+
 .section-heading {
   display: flex;
   align-items: center;
@@ -342,6 +350,22 @@ img {
 .fade-in-paragraph--visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.about-quote {
+  margin: 0;
+  padding: 2rem 1.5rem;
+  border: none;
+  border-left: 4px solid var(--color-white);
+  text-align: center;
+}
+
+.about-quote p {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  line-height: 1.25;
+  letter-spacing: 0.02em;
 }
 
 .section__footer-links {
