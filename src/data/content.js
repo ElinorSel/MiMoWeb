@@ -1,8 +1,10 @@
 export const worldOfMiMoParagraphs = [
-  'MiMo is a co-op puzzle and boss-fighting game set in two linked worlds, the Light World and the Dark World.',
-  'Two players, each in a different world, must work together to overcome various obstacles and defeat powerful bosses that inhabit both worlds simultaneously.',
-  'Players must communicate and coordinate their actions to solve puzzles that span across both worlds, using their unique abilities and interacting with the environment in creative ways.',
-  'The game features a hand-drawn art style, a hauntingly beautiful soundtrack, and a challenging gameplay experience that will test the players\' teamwork and problem-solving skills.',
+  'Long ago, two mirrored beings, Mi and Mo, lived in harmony.',
+  'One day, looking into an old mirror, they discovered they were flawed.',
+  'Desperate to become whole, they performed a ritual to separate their imperfections. But Instead, they broke the balance and shattered reality...',
+  'Together you must journey across distant lands, find the lost shards to repair the world and reunite Mo and Mo.',
+  'But Hurry... in the cracks of the world, something is stirring..',
+  'This is MiMo.',
 ];
 
 export const aboutMiMoParagraphs = [

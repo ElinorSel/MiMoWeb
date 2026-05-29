@@ -15,7 +15,10 @@ export default function FadeInParagraph({ children, className = '' }) {
           observer.disconnect();
         }
       },
-      { threshold: 0.25 },
+      {
+        threshold: 0.5,
+        rootMargin: '0px 0px -35% 0px',
+      },
     );
 
     observer.observe(el);

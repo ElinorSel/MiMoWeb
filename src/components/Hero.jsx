@@ -21,6 +21,7 @@ export default function Hero() {
         style={{ backgroundImage: `url(${bgUrl})` }}
         aria-hidden="true"
       />
+      <div className="hero__gradient" aria-hidden="true" />
       <div className="hero__content">
         <a
           href={UNITY_BUILD_URL}
@@ -43,7 +44,7 @@ export default function Hero() {
           />
         </a>
         <p className="hero__tagline">
-          MiMo — a Co-Op puzzle and boss-fighting game set in two linked worlds.
+          MiMo, a Co-Op puzzle and boss-fighting game set in two linked worlds.
         </p>
       </div>
     </section>
