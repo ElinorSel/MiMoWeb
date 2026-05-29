@@ -361,12 +361,107 @@ img {
   aspect-ratio: 16 / 9;
   background-color: var(--color-black);
   border: 2px solid var(--color-white);
+  overflow: hidden;
 }
 
-.youtube-section__player,
-.youtube-section__player iframe {
+.youtube-section__player {
   width: 100%;
   height: 100%;
+}
+
+.youtube-section__wrapper--chromeless .youtube-section__player {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.youtube-section__wrapper--chromeless .youtube-section__player iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%) scale(1.08);
+  pointer-events: none;
+}
+
+.youtube-section__play-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.82);
+  transition: background-color 0.2s ease;
+}
+
+.youtube-section__play-overlay:hover,
+.youtube-section__play-overlay:focus-visible {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.youtube-section__play-icon {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 1.75rem 0 1.75rem 3rem;
+  border-color: transparent transparent transparent var(--color-white);
+  margin-left: 0.5rem;
+}
+
+.section--gameplay .youtube-section__play-overlay {
+  background-color: rgba(255, 255, 255, 0.88);
+}
+
+.section--gameplay .youtube-section__play-overlay:hover,
+.section--gameplay .youtube-section__play-overlay:focus-visible {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.section--gameplay .youtube-section__play-icon {
+  border-color: transparent transparent transparent var(--color-black);
+}
+
+.welcome-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.welcome-modal__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2.5rem 3rem;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: 3px solid var(--color-black);
+  text-align: center;
+}
+
+.welcome-modal__title {
+  margin: 0;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.welcome-modal__button {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.6rem 2rem;
+  cursor: pointer;
+  background-color: var(--color-white);
+  border: 2px solid var(--color-black);
 }
 
 .soundtrack-toggle {

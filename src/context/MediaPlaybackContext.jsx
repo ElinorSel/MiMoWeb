@@ -1,10 +1,14 @@
 import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react';
 
+export const CINEMATIC_PLAYER_ID = 'youtube-cinematic';
+
 const MediaPlaybackContext = createContext(null);
 
 export function MediaPlaybackProvider({ children }) {
   const playingVideosRef = useRef(new Set());
   const [videoPlaying, setVideoPlaying] = useState(false);
+  const [welcomeDismissed, setWelcomeDismissed] = useState(false);
+  const [cinematicEnded, setCinematicEnded] = useState(false);
 
   const setVideoState = useCallback((playerId, isPlaying) => {
     if (isPlaying) {
@@ -15,9 +19,31 @@ export function MediaPlaybackProvider({ children }) {
     setVideoPlaying(playingVideosRef.current.size > 0);
   }, []);
 
+  const dismissWelcome = useCallback(() => {
+    setWelcomeDismissed(true);
+  }, []);
+
+  const markCinematicEnded = useCallback(() => {
+    setCinematicEnded(true);
+  }, []);
+
   const value = useMemo(
-    () => ({ videoPlaying, setVideoState }),
-    [videoPlaying, setVideoState],
+    () => ({
+      videoPlaying,
+      welcomeDismissed,
+      cinematicEnded,
+      setVideoState,
+      dismissWelcome,
+      markCinematicEnded,
+    }),
+    [
+      videoPlaying,
+      welcomeDismissed,
+      cinematicEnded,
+      setVideoState,
+      dismissWelcome,
+      markCinematicEnded,
+    ],
   );
 
   return (

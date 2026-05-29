@@ -4,27 +4,34 @@ import { useMediaPlayback } from '../context/MediaPlaybackContext.jsx';
 const SOUNDTRACK_SRC = '/audio/mimo-main-menu.mp3';
 
 export default function SiteSoundtrack() {
-  const { videoPlaying } = useMediaPlayback();
+  const { videoPlaying, cinematicEnded, welcomeDismissed } = useMediaPlayback();
   const audioRef = useRef(null);
   const startedRef = useRef(false);
   const userPausedRef = useRef(false);
   const pausedForVideoRef = useRef(false);
   const [playing, setPlaying] = useState(false);
-  const [needsInteraction, setNeedsInteraction] = useState(false);
 
   const startSoundtrack = useCallback(async () => {
     const audio = audioRef.current;
-    if (!audio || startedRef.current || userPausedRef.current || videoPlaying) return;
+    if (
+      !audio
+      || startedRef.current
+      || userPausedRef.current
+      || videoPlaying
+      || !cinematicEnded
+      || !welcomeDismissed
+    ) {
+      return;
+    }
 
     try {
       await audio.play();
       startedRef.current = true;
       setPlaying(true);
-      setNeedsInteraction(false);
     } catch {
-      setNeedsInteraction(true);
+      /* playback blocked */
     }
-  }, [videoPlaying]);
+  }, [videoPlaying, cinematicEnded, welcomeDismissed]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -36,24 +43,17 @@ export default function SiteSoundtrack() {
     audio.addEventListener('play', onPlay);
     audio.addEventListener('pause', onPause);
 
-    startSoundtrack();
-
-    const resumeOnInteraction = () => {
-      startSoundtrack();
-    };
-
-    document.addEventListener('click', resumeOnInteraction);
-    document.addEventListener('keydown', resumeOnInteraction);
-    document.addEventListener('touchstart', resumeOnInteraction);
-
     return () => {
       audio.removeEventListener('play', onPlay);
       audio.removeEventListener('pause', onPause);
-      document.removeEventListener('click', resumeOnInteraction);
-      document.removeEventListener('keydown', resumeOnInteraction);
-      document.removeEventListener('touchstart', resumeOnInteraction);
     };
-  }, [startSoundtrack]);
+  }, []);
+
+  useEffect(() => {
+    if (cinematicEnded && welcomeDismissed) {
+      startSoundtrack();
+    }
+  }, [cinematicEnded, welcomeDismissed, startSoundtrack]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -67,15 +67,15 @@ export default function SiteSoundtrack() {
       return;
     }
 
-    if (pausedForVideoRef.current && !userPausedRef.current) {
+    if (pausedForVideoRef.current && !userPausedRef.current && cinematicEnded) {
       audio.play().catch(() => {});
       pausedForVideoRef.current = false;
     }
-  }, [videoPlaying]);
+  }, [videoPlaying, cinematicEnded]);
 
   const toggleSoundtrack = async () => {
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio || !welcomeDismissed) return;
 
     if (audio.paused) {
       if (videoPlaying) {
@@ -89,9 +89,8 @@ export default function SiteSoundtrack() {
         userPausedRef.current = false;
         pausedForVideoRef.current = false;
         setPlaying(true);
-        setNeedsInteraction(false);
       } catch {
-        setNeedsInteraction(true);
+        /* playback blocked */
       }
     } else {
       audio.pause();
@@ -103,15 +102,16 @@ export default function SiteSoundtrack() {
   return (
     <>
       <audio ref={audioRef} src={SOUNDTRACK_SRC} loop preload="auto" />
-      <button
-        type="button"
-        className="soundtrack-toggle hover-dark"
-        onClick={toggleSoundtrack}
-        aria-label={playing ? 'Pause soundtrack' : 'Play soundtrack'}
-        title={needsInteraction && !playing ? 'Click to start soundtrack' : undefined}
-      >
-        {playing ? '♫' : '♪'}
-      </button>
+      {welcomeDismissed && (
+        <button
+          type="button"
+          className="soundtrack-toggle hover-dark"
+          onClick={toggleSoundtrack}
+          aria-label={playing ? 'Pause soundtrack' : 'Play soundtrack'}
+        >
+          {playing ? '♫' : '♪'}
+        </button>
+      )}
     </>
   );
 }
